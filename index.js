@@ -1,17 +1,24 @@
 import express from "express"
 import cors from "cors";
+import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 
+dotenv.config();
+
 const app = express();
-const client = new MongoClient("mongodb+srv://brodied:%40Thekingofhearts123456@atlascluster.wpdiwnu.mongodb.net/");
-const db = client.db("cs3870db");
-const collection = "contacts";
+const client = new MongoClient();
+
+// Server configuration
+const PORT = process.env.PORT ?? 8081;
+const HOST = process.env.HOST ?? "0.0.0.0";
+
+// MongoDB configuration
+const MONGO_URI = process.env.MONGO_URI;
+const DBNAME = process.env.DBNAME;
+const COLLECTION = process.env.COLLECTION;
 
 app.use(cors());
 app.use(express.json());
-
-const PORT = process.env.PORT ?? 8081;
-const HOST = process.env.HOST ?? "127.0.0.1";
 
 app.listen(PORT, HOST, () => {
     console.log(`Server running at http://${HOST}:${PORT}`);
