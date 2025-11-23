@@ -9,8 +9,8 @@ const app = express();
 const client = new MongoClient();
 
 // Server configuration
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
+const PORT = process.env.PORT ?? 8081;
+const HOST = process.env.HOST ?? "0.0.0.0";
 
 // MongoDB configuration
 const MONGO_URI = process.env.MONGO_URI;
