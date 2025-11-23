@@ -6,7 +6,6 @@ import { MongoClient } from "mongodb";
 dotenv.config();
 
 const app = express();
-const client = new MongoClient();
 
 // Server configuration
 const PORT = process.env.PORT ?? 8081;
@@ -16,6 +15,9 @@ const HOST = process.env.HOST ?? "0.0.0.0";
 const MONGO_URI = process.env.MONGO_URI;
 const DBNAME = process.env.DBNAME;
 const COLLECTION = process.env.COLLECTION;
+
+const client = new MongoClient(MONGO_URI);
+const db = client.db(DBNAME);
 
 app.use(cors());
 app.use(express.json());
@@ -34,7 +36,7 @@ app.get("/contacts", async (req, res) => {
     console.log("Node connected successfully to GET MongoDB");
     const query = {};
     const results = await db
-        .collection(collection)
+        .collection(COLLECTION)
         .find(query)
         .limit(100)
         .toArray();
