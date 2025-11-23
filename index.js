@@ -44,7 +44,7 @@ app.get("/contacts", async (req, res) => {
     res.status(200).json(results);
 });
 
-app.get("/contacts:name", async (req, res) => {
+app.get("/contacts/:name", async (req, res) => {
     const contactName = req.params.name;
     console.log("Contact to find :", contactName);
     await client.connect();
@@ -110,7 +110,7 @@ app.post("/contacts", async (req, res) => {
     }
 });
 
-app.delete("/contacts:name", async (req, res) => {
+app.delete("/contacts/:name", async (req, res) => {
     try {
         // Read parameter id
         const name = req.params.name;
@@ -144,7 +144,7 @@ app.delete("/contacts:name", async (req, res) => {
     }
 });
 
-app.put("/contacts:name", async (req, res) => {
+app.put("/contacts/:name", async (req, res) => {
     let new_image_url;
 
     try {
