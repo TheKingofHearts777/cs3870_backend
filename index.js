@@ -50,7 +50,7 @@ app.get("/contacts:name", async (req, res) => {
     await client.connect();
     console.log("Node connected successfully to GET-id MongoDB");
     const query = { contact_name: contactName };
-    const results = await db.collection(collection)
+    const results = await db.collection(COLLECTION)
         .findOne(query);
     console.log("Results :", results);
     if (!results) {
@@ -72,7 +72,7 @@ app.post("/contacts", async (req, res) => {
         const { contact_name, phone_number, message, image_url } = req.body;
         await client.connect();
         console.log("Node connected successfully to POST MongoDB");
-        const contactsCollection = db.collection(collection);
+        const contactsCollection = db.collection(COLLECTION);
         const existingContact = await contactsCollection.findOne({
             contact_name: contact_name
         });
@@ -119,7 +119,7 @@ app.delete("/contacts:name", async (req, res) => {
         await client.connect();
         console.log("Node connected successfully to DELETE MongoDB");
         // Reference collection
-        const contactsCollection = db.collection(collection);
+        const contactsCollection = db.collection(COLLECTION);
         // Check if contact already exists
         const existingContact = await contactsCollection.findOne({
             contact_name: name,
@@ -153,7 +153,7 @@ app.put("/contacts:name", async (req, res) => {
         const { contact_name, phone_number, message, image_url } = req.body;
         await client.connect();
         console.log("Node connected successfully to PUT MongoDB");
-        const contactsCollection = db.collection(collection);
+        const contactsCollection = db.collection(COLLECTION);
         const existingContact = await contactsCollection.findOne({
             contact_name: name,
         });
