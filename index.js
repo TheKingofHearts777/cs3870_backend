@@ -31,6 +31,10 @@ app.listen(PORT, HOST, () => {
     });
 });
 
+app.get("/name", (req, res) => {
+    res.send("My name is Dylan. I'm here with Christian");
+});
+
 app.get("/contacts", async (req, res) => {
     await client.connect();
     console.log("Node connected successfully to GET MongoDB");
